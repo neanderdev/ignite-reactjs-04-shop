@@ -27,13 +27,10 @@ export const CloseButton = styled("button", {
   cursor: "pointer",
   border: "none",
   background: "none",
+  color: "$gray300",
 
   "&:hover": {
-    svg: {
-      path: {
-        fill: "$white",
-      },
-    },
+    color: "$white",
   },
 });
 
@@ -55,23 +52,25 @@ export const Items = styled("div", {
 
 export const Item = styled("div", {
   display: "flex",
+  alignItems: "center",
   gap: "1.25rem",
   marginBottom: "1.5rem",
 
   ".image-container": {
     background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
-    width: 102,
-    height: 94,
+    width: 100,
+    height: 100,
     borderRadius: 8,
   },
 
   ".info": {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "flex-start",
 
-    gap: ".5rem",
+    gap: "1rem",
+    flex: 1,
 
     span: {
       display: "block",
@@ -83,17 +82,47 @@ export const Item = styled("div", {
       display: "block",
       fontSize: "$md",
     },
+  },
+});
 
-    button: {
-      cursor: "pointer",
-      border: "none",
-      background: "none",
+export const Actions = styled("div", {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "1rem",
+
+  button: {
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: ".5rem",
+    padding: ".5rem",
+
+    border: "none",
+    color: "$white",
+    background: "$green500",
+    fontWeight: "bold",
+    borderRadius: 6,
+
+    "&:hover": {
+      background: "$green300",
+    },
+  },
+
+  ".quantity": {
+    display: "flex",
+    gap: ".75rem",
+
+    span: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+
+      fontSize: "$lg",
+
       fontWeight: "bold",
-      color: "$green500",
-
-      "&:hover": {
-        color: "$green300",
-      },
+      verticalAlign: "bottom",
     },
   },
 });
@@ -132,7 +161,12 @@ export const PurchaseDetails = styled("div", {
     fontWeight: "bold",
     fontSize: "$md",
 
-    "&:hover": {
+    "&:disabled": {
+      opacity: 0.6,
+      cursor: "not-allowed",
+    },
+
+    "&:not(:disabled):hover": {
       background: "$green300",
     },
   },

@@ -43,15 +43,33 @@ export const Product = styled("div", {
     opacity: 0,
     transition: "all 0.2s ease-in-out",
 
-    strong: {
-      fontSize: "$lg",
-      color: "$gray100",
+    ".title": {
+      display: "flex",
+      gap: ".5rem",
+      flexDirection: "column",
+
+      strong: {
+        fontSize: "$lg",
+        color: "$gray100",
+      },
+
+      span: {
+        fontSize: "$xl",
+        fontWeight: "bold",
+        color: "$green300",
+      },
     },
 
-    span: {
-      fontSize: "$xl",
-      fontWeight: "bold",
-      color: "$green300",
+    ".icon": {
+      width: "3.5rem",
+      height: "3.5rem",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+
+      borderRadius: 6,
+      background: "$green500",
+      color: "$white",
     },
   },
 

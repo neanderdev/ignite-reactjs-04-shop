@@ -1,9 +1,10 @@
-import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from 'next/head';
 import Image from "next/image";
-import { useState } from "react";
+import { useContext } from 'react';
 import Stripe from "stripe";
+
+import { CartShoppingContext } from '../../contexts/CartShoppingContext';
 
 import { stripe } from "../../lib/stripe";
 
@@ -21,25 +22,7 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
-
-    async function handleBuyButton() {
-        try {
-            setIsCreatingCheckoutSession(true);
-
-            const response = await axios.post('/api/checkout', {
-                priceId: product.defaultPriceId,
-            })
-
-            const { checkoutUrl } = response.data;
-
-            window.location.href = checkoutUrl;
-        } catch (err) {
-            setIsCreatingCheckoutSession(false);
-
-            alert('Falha ao redirecionar ao checkout!')
-        }
-    }
+    const { addItem } = useContext(CartShoppingContext);
 
     const title = `${product.name} | Ignite Shop`
 
@@ -61,8 +44,8 @@ export default function Product({ product }: ProductProps) {
 
                     <p>{product.description}</p>
 
-                    <button disabled={isCreatingCheckoutSession} onClick={handleBuyButton}>
-                        Comprar agora
+                    <button onClick={() => addItem(product)}>
+                        Colocar na sacola
                     </button>
                 </ProductDetails>
             </ProductContainer>
