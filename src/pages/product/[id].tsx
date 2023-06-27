@@ -41,10 +41,12 @@ export default function Product({ product }: ProductProps) {
         }
     }
 
+    const title = `${product.name} | Ignite Shop`
+
     return (
         <>
             <Head>
-                <title>{product.name} | Ignite Shop</title>
+                <title>{title}</title>
             </Head>
 
             <ProductContainer>

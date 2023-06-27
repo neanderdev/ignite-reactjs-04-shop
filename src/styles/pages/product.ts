@@ -8,6 +8,12 @@ export const ProductContainer = styled("main", {
 
   maxWidth: 1180,
   margin: "0 auto",
+
+  "@bp": {
+    flexWrap: "wrap",
+    gridTemplateColumns: "1fr",
+    maxWidth: "100%",
+  },
 });
 
 export const ImageContainer = styled("div", {
@@ -24,6 +30,11 @@ export const ImageContainer = styled("div", {
 
   img: {
     objectFit: "cover",
+    width: "100%",
+  },
+
+  "@bp": {
+    maxWidth: "100%",
   },
 });
 
@@ -68,6 +79,12 @@ export const ProductDetails = styled("div", {
 
     "&:not(:disabled):hover": {
       backgroundColor: "$green300",
+    },
+  },
+
+  "@bp": {
+    button: {
+      marginBlock: "4rem",
     },
   },
 });
