@@ -18,6 +18,7 @@ export const CartShoppingContainer = styled("div", {
   padding: "3rem",
 
   background: "$gray800",
+  boxShadow: "-10px 0 30px rgba(0, 0, 0, 0.8)",
 
   h2: {
     marginTop: "1rem",

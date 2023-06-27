@@ -1,6 +1,7 @@
 import { keyframes } from '@stitches/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Handbag } from 'phosphor-react';
 import { useContext, useState } from 'react';
 
@@ -13,6 +14,8 @@ import { HeaderContainer, ShoppingCartButton } from './styles';
 import logoImg from '../../assets/logo.svg';
 
 export function Header() {
+    const { pathname } = useRouter();
+
     const [cartShoppingIsOpen, setCartShoppingIsOpen] = useState(false)
     const [aimation, setAnimation] = useState('')
 
@@ -40,6 +43,20 @@ export function Header() {
         setTimeout(() => {
             setCartShoppingIsOpen(false)
         }, 150)
+    }
+
+    if (pathname === '/success') {
+        return (
+            <HeaderContainer
+                style={{
+                    justifyContent: 'center',
+                }}
+            >
+                <Link href="/">
+                    <Image src={logoImg} alt="" />
+                </Link>
+            </HeaderContainer>
+        )
     }
 
     return (
