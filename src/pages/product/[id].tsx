@@ -15,9 +15,11 @@ interface ProductProps {
         id: string
         name: string
         imageUrl: string
+        unitAmount: number
         price: string
         description: string
         defaultPriceId: string
+        quantity: number
     }
 }
 
@@ -80,12 +82,14 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
                 id: product.id,
                 name: product.name,
                 imageUrl: product.images[0],
+                unitAmount: price.unit_amount,
                 price: new Intl.NumberFormat('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 }).format(price.unit_amount / 100),
                 description: product.description,
-                defaultPriceId: price.id
+                defaultPriceId: price.id,
+                quantity: 1,
             }
         },
         revalidate: 60 * 60 * 1 // 1 hours

@@ -12,7 +12,7 @@ interface CartShoppingProps {
 }
 
 export function CartShopping({ styles, closeCartShopping }: CartShoppingProps) {
-    const { cartShopping, removeItem } = useContext(CartShoppingContext)
+    const { amount, cartShopping, removeItem, decreaseItemQuantity, increaseItemQuantity } = useContext(CartShoppingContext)
 
     return (
         <CartShoppingContainer style={styles}>
@@ -42,13 +42,13 @@ export function CartShopping({ styles, closeCartShopping }: CartShoppingProps) {
 
                                     <Actions>
                                         <div className="quantity">
-                                            <button>
+                                            <button onClick={() => decreaseItemQuantity(product)}>
                                                 <Minus weight="bold" color="white" size={18} />
                                             </button>
 
                                             <span>{product.quantity}</span>
 
-                                            <button>
+                                            <button onClick={() => increaseItemQuantity(product)}>
                                                 <Plus weight="bold" color="white" size={18} />
                                             </button>
                                         </div>
@@ -79,7 +79,7 @@ export function CartShopping({ styles, closeCartShopping }: CartShoppingProps) {
                 <div>
                     <p>Valor total</p>
 
-                    <span>R$ 270,00</span>
+                    <span>{amount}</span>
                 </div>
 
                 <button>
