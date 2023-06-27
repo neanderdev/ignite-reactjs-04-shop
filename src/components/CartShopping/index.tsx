@@ -1,6 +1,7 @@
+import axios from 'axios';
 import Image from 'next/image';
-import { Minus, Plus, TrashSimple, X } from 'phosphor-react';
-import { useContext } from 'react';
+import { CircleNotch, Minus, Plus, TrashSimple, X } from 'phosphor-react';
+import { useContext, useState } from 'react';
 
 import { CartShoppingContext } from '../../contexts/CartShoppingContext';
 
@@ -12,7 +13,34 @@ interface CartShoppingProps {
 }
 
 export function CartShopping({ styles, closeCartShopping }: CartShoppingProps) {
+    const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+
     const { amount, cartShopping, removeItem, decreaseItemQuantity, increaseItemQuantity } = useContext(CartShoppingContext)
+
+    async function handleBuyProduct() {
+        try {
+            setIsCreatingCheckoutSession(true)
+
+            const orderList = cartShopping.map(product => {
+                return {
+                    price: product.defaultPriceId,
+                    quantity: product.quantity,
+                }
+            })
+
+            const response = await axios.post('/api/checkout', { orderList })
+
+            const { checkoutUrl } = response.data
+
+            window.location.href = checkoutUrl
+        } catch (err) {
+            // Conectar com uma ferramenta de observabilidade (Datadog / Sentry)
+
+            setIsCreatingCheckoutSession(false)
+
+            alert('Falha ao redirecionar ao checkout!')
+        }
+    }
 
     return (
         <CartShoppingContainer style={styles}>
@@ -82,8 +110,14 @@ export function CartShopping({ styles, closeCartShopping }: CartShoppingProps) {
                     <span>{amount}</span>
                 </div>
 
-                <button>
-                    Finalizar compra
+                <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession} >
+                    {
+                        isCreatingCheckoutSession
+                            ?
+                            <CircleNotch className="loading" weight="bold" />
+                            :
+                            'Finalizar compra'
+                    }
                 </button>
             </PurchaseDetails>
         </CartShoppingContainer>

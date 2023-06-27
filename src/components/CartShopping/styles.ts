@@ -1,4 +1,9 @@
-import { styled } from "@stitches/react";
+import { keyframes, styled } from "@stitches/react";
+
+const rotate = keyframes({
+  "0%": { transform: "rotate(0deg)" },
+  "100%": { transform: "rotate(360deg)" },
+});
 
 export const CartShoppingContainer = styled("div", {
   height: "100vh",
@@ -160,6 +165,10 @@ export const PurchaseDetails = styled("div", {
     cursor: "pointer",
     fontWeight: "bold",
     fontSize: "$md",
+
+    ".loading": {
+      animation: `${rotate} 1000ms infinite linear`,
+    },
 
     "&:disabled": {
       opacity: 0.6,
