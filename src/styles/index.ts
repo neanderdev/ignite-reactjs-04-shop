@@ -30,4 +30,8 @@ export const {
       "2xl": "2rem",
     },
   },
+  
+  media: {
+    bp: '(max-width: 768px)',
+  },
 });
